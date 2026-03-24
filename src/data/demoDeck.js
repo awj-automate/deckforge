@@ -18,7 +18,7 @@ export const demoDeck = {
       id: "slide-001",
       notes: "Open with energy. Pause after the tagline.",
       transition: "fade",
-      background: { type: "solid", color: "#1A1D23" },
+      background: { type: "solid", color: "#FFFFFF" },
       elements: [
         {
           id: "el-001a", type: "shape", shape: "circle",
@@ -80,7 +80,7 @@ export const demoDeck = {
       id: "slide-002",
       notes: "Paint the pain. Let the numbers land.",
       transition: "slideLeft",
-      background: { type: "solid", color: "#1A1D23" },
+      background: { type: "solid", color: "#FFFFFF" },
       elements: [
         {
           id: "el-002a", type: "text",
@@ -189,7 +189,7 @@ export const demoDeck = {
       id: "slide-003",
       notes: "This is the 'aha' moment. Lumen is the answer.",
       transition: "fade",
-      background: { type: "solid", color: "#1A1D23" },
+      background: { type: "solid", color: "#FFFFFF" },
       elements: [
         {
           id: "el-003a", type: "shape", shape: "rectangle",
@@ -272,7 +272,7 @@ export const demoDeck = {
       id: "slide-004",
       notes: "Show a concrete example. This is what using Lumen feels like.",
       transition: "slideLeft",
-      background: { type: "solid", color: "#1A1D23" },
+      background: { type: "solid", color: "#FFFFFF" },
       elements: [
         {
           id: "el-004a", type: "text",
@@ -341,7 +341,7 @@ Lumen: Three factors drove the decline:
       id: "slide-005",
       notes: "Market size — make investors see the scale.",
       transition: "fade",
-      background: { type: "solid", color: "#1A1D23" },
+      background: { type: "solid", color: "#FFFFFF" },
       elements: [
         {
           id: "el-005a", type: "text",
@@ -459,7 +459,7 @@ Lumen: Three factors drove the decline:
       id: "slide-006",
       notes: "Traction proves this isn't just an idea.",
       transition: "slideLeft",
-      background: { type: "solid", color: "#1A1D23" },
+      background: { type: "solid", color: "#FFFFFF" },
       elements: [
         {
           id: "el-006a", type: "text",
@@ -545,7 +545,7 @@ Lumen: Three factors drove the decline:
       id: "slide-007",
       notes: "The team. Keep it brief.",
       transition: "fade",
-      background: { type: "solid", color: "#1A1D23" },
+      background: { type: "solid", color: "#FFFFFF" },
       elements: [
         {
           id: "el-007a", type: "text",
@@ -629,7 +629,7 @@ Lumen: Three factors drove the decline:
       id: "slide-008",
       notes: "Close strong. Be specific about the ask.",
       transition: "fade",
-      background: { type: "solid", color: "#1A1D23" },
+      background: { type: "solid", color: "#FFFFFF" },
       elements: [
         {
           id: "el-008a", type: "shape", shape: "rectangle",
