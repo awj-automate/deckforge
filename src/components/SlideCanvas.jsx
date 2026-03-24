@@ -423,8 +423,9 @@ export default function SlideCanvas() {
   const wrapRef = useRef(null);
   const slideRef = useRef(null);
 
-  // Store selectors
-  const getCurrentSlide = useDeckStore(s => s.getCurrentSlide);
+  // Store selectors — select raw state so Zustand re-renders on changes
+  const deck = useDeckStore(s => s.deck);
+  const currentSlideIndex = useDeckStore(s => s.currentSlideIndex);
   const selectedElementIds = useDeckStore(s => s.selectedElementIds);
   const editingTextId = useDeckStore(s => s.editingTextId);
   const zoom = useDeckStore(s => s.zoom);
@@ -446,7 +447,7 @@ export default function SlideCanvas() {
   const copyElements = useDeckStore(s => s.copyElements);
   const cutElements = useDeckStore(s => s.cutElements);
 
-  const slide = getCurrentSlide();
+  const slide = deck.slides[currentSlideIndex] || null;
 
   // Local interaction state
   const [dragging, setDragging] = useState(null);        // { startX, startY, origPositions: {id:{x,y}}, elementIds }
