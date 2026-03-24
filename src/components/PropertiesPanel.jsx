@@ -15,9 +15,9 @@ const styles = {
     width: '100%',
     height: '100%',
     overflowY: 'auto',
-    background: 'var(--bg-panel, #1a1a2e)',
-    color: 'var(--text-primary, #e0e0e0)',
-    fontSize: 12,
+    background: 'var(--bg-panel, #FFFFFF)',
+    color: 'var(--text-primary, #1A1D23)',
+    fontSize: 13,
     fontFamily: 'inherit',
     userSelect: 'none',
     padding: '0 0 24px 0',
@@ -31,15 +31,15 @@ const styles = {
     userSelect: 'none',
   },
   sectionTitle: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: 600,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    color: 'var(--text-muted, #888)',
+    color: 'var(--text-muted, #6B7280)',
   },
   chevron: {
     fontSize: 10,
-    color: 'var(--text-muted, #888)',
+    color: 'var(--text-muted, #6B7280)',
     transition: 'transform 0.15s',
   },
   sectionBody: {
@@ -53,40 +53,40 @@ const styles = {
   },
   label: {
     fontSize: 11,
-    color: 'var(--text-muted, #888)',
+    color: 'var(--text-muted, #6B7280)',
     minWidth: 52,
     flexShrink: 0,
   },
   input: {
     width: '100%',
-    background: 'var(--bg-input, #12122a)',
-    color: 'var(--text-primary, #e0e0e0)',
-    border: '1px solid var(--border, #2a2a4a)',
+    background: 'var(--bg-input, #FFFFFF)',
+    color: 'var(--text-primary, #1A1D23)',
+    border: '1px solid var(--border, #E2E5EB)',
     borderRadius: 4,
-    padding: '4px 6px',
-    fontSize: 11,
+    padding: '5px 7px',
+    fontSize: 12,
     outline: 'none',
     boxSizing: 'border-box',
   },
   numberInput: {
     width: 60,
-    background: 'var(--bg-input, #12122a)',
-    color: 'var(--text-primary, #e0e0e0)',
-    border: '1px solid var(--border, #2a2a4a)',
+    background: 'var(--bg-input, #FFFFFF)',
+    color: 'var(--text-primary, #1A1D23)',
+    border: '1px solid var(--border, #E2E5EB)',
     borderRadius: 4,
-    padding: '4px 6px',
-    fontSize: 11,
+    padding: '5px 7px',
+    fontSize: 12,
     outline: 'none',
     boxSizing: 'border-box',
   },
   select: {
     width: '100%',
-    background: 'var(--bg-input, #12122a)',
-    color: 'var(--text-primary, #e0e0e0)',
-    border: '1px solid var(--border, #2a2a4a)',
+    background: 'var(--bg-input, #FFFFFF)',
+    color: 'var(--text-primary, #1A1D23)',
+    border: '1px solid var(--border, #E2E5EB)',
     borderRadius: 4,
-    padding: '4px 6px',
-    fontSize: 11,
+    padding: '5px 7px',
+    fontSize: 12,
     outline: 'none',
     boxSizing: 'border-box',
   },
@@ -94,7 +94,7 @@ const styles = {
     width: 28,
     height: 28,
     borderRadius: 4,
-    border: '1px solid var(--border, #2a2a4a)',
+    border: '1px solid var(--border, #E2E5EB)',
     cursor: 'pointer',
     padding: 0,
     overflow: 'hidden',
@@ -113,19 +113,19 @@ const styles = {
   },
   slider: {
     flex: 1,
-    accentColor: 'var(--accent, #6366F1)',
+    accentColor: 'var(--accent, #3B82F6)',
     height: 4,
   },
   textarea: {
     width: '100%',
     minHeight: 60,
     resize: 'vertical',
-    background: 'var(--bg-input, #12122a)',
-    color: 'var(--text-primary, #e0e0e0)',
-    border: '1px solid var(--border, #2a2a4a)',
+    background: 'var(--bg-input, #FFFFFF)',
+    color: 'var(--text-primary, #1A1D23)',
+    border: '1px solid var(--border, #E2E5EB)',
     borderRadius: 4,
     padding: '6px 8px',
-    fontSize: 11,
+    fontSize: 12,
     outline: 'none',
     fontFamily: 'inherit',
     boxSizing: 'border-box',
@@ -137,17 +137,17 @@ const styles = {
     width: 28,
     height: 28,
     borderRadius: 4,
-    border: '1px solid var(--border, #2a2a4a)',
-    background: 'var(--bg-input, #12122a)',
-    color: 'var(--text-primary, #e0e0e0)',
+    border: '1px solid var(--border, #E2E5EB)',
+    background: 'var(--bg-input, #FFFFFF)',
+    color: 'var(--text-primary, #1A1D23)',
     cursor: 'pointer',
     fontSize: 12,
     flexShrink: 0,
     padding: 0,
   },
   iconBtnActive: {
-    background: 'var(--accent, #6366F1)',
-    borderColor: 'var(--accent, #6366F1)',
+    background: 'var(--accent, #3B82F6)',
+    borderColor: 'var(--accent, #3B82F6)',
     color: '#fff',
   },
   toggleRow: {
@@ -157,7 +157,7 @@ const styles = {
   },
   divider: {
     height: 1,
-    background: 'var(--border, #2a2a4a)',
+    background: 'var(--border, #E2E5EB)',
     margin: '6px 14px',
   },
 };
@@ -274,7 +274,7 @@ function SlideProperties() {
   const slide = useDeckStore((s) => s.deck.slides[s.currentSlideIndex]);
   const updateSlide = useDeckStore((s) => s.updateSlide);
 
-  const bg = slide?.background || { type: 'solid', color: '#1a1a2e' };
+  const bg = slide?.background || { type: 'solid', color: '#FFFFFF' };
   const isGradient = bg.type === 'gradient' || bg.type === 'linear';
 
   const setBg = useCallback((updates) => {
@@ -292,7 +292,7 @@ function SlideProperties() {
             <ToggleButton
               active={!isGradient}
               title="Solid color"
-              onClick={() => setBg({ type: 'solid', color: bg.color || bg.colors?.[0] || '#1a1a2e' })}
+              onClick={() => setBg({ type: 'solid', color: bg.color || bg.colors?.[0] || '#FFFFFF' })}
             >
               Solid
             </ToggleButton>
@@ -302,7 +302,7 @@ function SlideProperties() {
               onClick={() =>
                 setBg({
                   type: 'linear',
-                  colors: bg.colors || [bg.color || '#1a1a2e', '#6366F1'],
+                  colors: bg.colors || [bg.color || '#FFFFFF', '#3B82F6'],
                   angle: bg.angle ?? 135,
                 })
               }
@@ -316,10 +316,10 @@ function SlideProperties() {
           <div style={styles.row}>
             <span style={styles.label}>Color</span>
             <ColorPicker
-              value={bg.color || '#1a1a2e'}
+              value={bg.color || '#FFFFFF'}
               onChange={(c) => setBg({ color: c })}
             />
-            <span style={{ fontSize: 10, color: 'var(--text-muted, #888)' }}>{bg.color}</span>
+            <span style={{ fontSize: 10, color: 'var(--text-muted, #6B7280)' }}>{bg.color}</span>
           </div>
         )}
 
@@ -328,9 +328,9 @@ function SlideProperties() {
             <div style={styles.row}>
               <span style={styles.label}>Color 1</span>
               <ColorPicker
-                value={(bg.colors && bg.colors[0]) || '#1a1a2e'}
+                value={(bg.colors && bg.colors[0]) || '#FFFFFF'}
                 onChange={(c) => {
-                  const cols = [...(bg.colors || ['#1a1a2e', '#6366F1'])];
+                  const cols = [...(bg.colors || ['#FFFFFF', '#3B82F6'])];
                   cols[0] = c;
                   setBg({ colors: cols });
                 }}
@@ -339,9 +339,9 @@ function SlideProperties() {
             <div style={styles.row}>
               <span style={styles.label}>Color 2</span>
               <ColorPicker
-                value={(bg.colors && bg.colors[1]) || '#6366F1'}
+                value={(bg.colors && bg.colors[1]) || '#3B82F6'}
                 onChange={(c) => {
-                  const cols = [...(bg.colors || ['#1a1a2e', '#6366F1'])];
+                  const cols = [...(bg.colors || ['#FFFFFF', '#3B82F6'])];
                   cols[1] = c;
                   setBg({ colors: cols });
                 }}
@@ -562,10 +562,10 @@ function TextControls({ el, update }) {
       <div style={styles.row}>
         <span style={styles.label}>Color</span>
         <ColorPicker
-          value={el.color || '#FFFFFF'}
+          value={el.color || '#1A1D23'}
           onChange={(c) => update({ color: c })}
         />
-        <span style={{ fontSize: 10, color: 'var(--text-muted, #888)' }}>{el.color}</span>
+        <span style={{ fontSize: 10, color: 'var(--text-muted, #6B7280)' }}>{el.color}</span>
       </div>
       <NumberField
         label="Line H"
@@ -673,7 +673,7 @@ function TextControls({ el, update }) {
 // ─── SHAPE CONTROLS ──────────────────────────────────────────────────────────
 
 function ShapeControls({ el, update }) {
-  const fill = el.fill || { type: 'solid', color: '#6366F1' };
+  const fill = el.fill || { type: 'solid', color: '#3B82F6' };
   const border = el.border || { width: 0, color: '#FFFFFF', dash: 'solid' };
 
   const updateFill = (updates) => update({ fill: { ...fill, ...updates } });
@@ -705,10 +705,10 @@ function ShapeControls({ el, update }) {
                 updateFill({
                   type: f.key,
                   ...(f.key !== 'solid' && !fill.colors
-                    ? { colors: [fill.color || '#6366F1', '#818CF8'] }
+                    ? { colors: [fill.color || '#3B82F6', '#60A5FA'] }
                     : {}),
                   ...(f.key === 'solid' && fill.colors
-                    ? { color: fill.colors[0] || '#6366F1' }
+                    ? { color: fill.colors[0] || '#3B82F6' }
                     : {}),
                 })
               }
@@ -724,7 +724,7 @@ function ShapeControls({ el, update }) {
         <div style={styles.row}>
           <span style={styles.label}>Color</span>
           <ColorPicker
-            value={fill.color || '#6366F1'}
+            value={fill.color || '#3B82F6'}
             onChange={(c) => updateFill({ color: c })}
           />
         </div>
@@ -734,9 +734,9 @@ function ShapeControls({ el, update }) {
           <div style={styles.row}>
             <span style={styles.label}>Color 1</span>
             <ColorPicker
-              value={(fill.colors && fill.colors[0]) || '#6366F1'}
+              value={(fill.colors && fill.colors[0]) || '#3B82F6'}
               onChange={(c) => {
-                const cols = [...(fill.colors || ['#6366F1', '#818CF8'])];
+                const cols = [...(fill.colors || ['#3B82F6', '#60A5FA'])];
                 cols[0] = c;
                 updateFill({ colors: cols });
               }}
@@ -745,9 +745,9 @@ function ShapeControls({ el, update }) {
           <div style={styles.row}>
             <span style={styles.label}>Color 2</span>
             <ColorPicker
-              value={(fill.colors && fill.colors[1]) || '#818CF8'}
+              value={(fill.colors && fill.colors[1]) || '#60A5FA'}
               onChange={(c) => {
-                const cols = [...(fill.colors || ['#6366F1', '#818CF8'])];
+                const cols = [...(fill.colors || ['#3B82F6', '#60A5FA'])];
                 cols[1] = c;
                 updateFill({ colors: cols });
               }}
@@ -965,8 +965,8 @@ function PropertiesPanel() {
           padding: '12px 14px 6px',
           fontSize: 13,
           fontWeight: 600,
-          color: 'var(--text-primary, #e0e0e0)',
-          borderBottom: '1px solid var(--border, #2a2a4a)',
+          color: 'var(--text-primary, #1A1D23)',
+          borderBottom: '1px solid var(--border, #E2E5EB)',
           marginBottom: 4,
         }}
       >

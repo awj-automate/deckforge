@@ -31,7 +31,7 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
           key={el.id}
           style={{
             ...baseStyle,
-            color: el.color || '#FFFFFF',
+            color: el.color || '#1A1D23',
             fontSize: el.fontSize || 24,
             fontFamily: el.fontFamily || 'DM Sans',
             fontWeight: el.fontWeight || '400',
@@ -51,7 +51,7 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
     }
 
     if (el.type === 'shape') {
-      const fill = el.fill ? cssBackground(el.fill) : '#6366F1';
+      const fill = el.fill ? cssBackground(el.fill) : '#3B82F6';
       if (el.shape === 'circle') {
         return (
           <div
@@ -76,7 +76,7 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
               height: 0,
               borderLeft: `${el.width / 2}px solid transparent`,
               borderRight: `${el.width / 2}px solid transparent`,
-              borderBottom: `${el.height}px solid ${typeof fill === 'string' && fill.startsWith('#') ? fill : '#6366F1'}`,
+              borderBottom: `${el.height}px solid ${typeof fill === 'string' && fill.startsWith('#') ? fill : '#3B82F6'}`,
             }}
           />
         );
@@ -127,9 +127,9 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
           ) : (
             <div style={{
               width: '100%', height: '100%',
-              background: '#333',
+              background: '#F0F2F5',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#666', fontSize: 14,
+              color: '#9CA3AF', fontSize: 14,
             }}>
               IMG
             </div>
@@ -144,8 +144,8 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
           key={el.id}
           style={{
             ...baseStyle,
-            background: '#1e1e1e',
-            color: el.color || '#E0E0E0',
+            background: '#F0F2F5',
+            color: el.color || '#374151',
             fontSize: el.fontSize || 14,
             fontFamily: el.fontFamily || 'Space Mono, monospace',
             padding: 8,
@@ -165,7 +165,7 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
           style={{
             ...baseStyle,
             height: el.thickness || 2,
-            background: el.color || '#FFFFFF',
+            background: el.color || '#1A1D23',
           }}
         />
       );
@@ -174,7 +174,7 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
     return null;
   };
 
-  const bg = slide.background ? cssBackground(slide.background) : '#1a1a2e';
+  const bg = slide.background ? cssBackground(slide.background) : '#FFFFFF';
 
   return (
     <div
@@ -188,15 +188,15 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
         cursor: 'pointer',
         marginBottom: 8,
         borderRadius: 4,
-        border: isActive ? '2px solid #6366F1' : '2px solid transparent',
+        border: isActive ? '2px solid #3B82F6' : '2px solid transparent',
         padding: 2,
         transition: 'border-color 0.15s ease',
       }}
     >
       {/* Slide number */}
       <div style={{
-        fontSize: 10,
-        color: isActive ? '#a5b4fc' : '#888',
+        fontSize: 11,
+        color: isActive ? '#3B82F6' : '#6B7280',
         marginBottom: 2,
         paddingLeft: 2,
         fontFamily: 'DM Sans, sans-serif',
@@ -211,7 +211,7 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
         overflow: 'hidden',
         borderRadius: 3,
         position: 'relative',
-        boxShadow: isActive ? '0 0 8px rgba(99,102,241,0.4)' : '0 1px 3px rgba(0,0,0,0.4)',
+        boxShadow: isActive ? '0 0 8px rgba(59,130,246,0.3)' : '0 1px 3px rgba(0,0,0,0.1)',
       }}>
         <div style={{
           width: SLIDE_WIDTH,
@@ -229,7 +229,7 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
       {slide.notes && (
         <div style={{
           fontSize: 9,
-          color: '#777',
+          color: '#9CA3AF',
           marginTop: 3,
           paddingLeft: 2,
           paddingRight: 2,
@@ -331,8 +331,8 @@ export default function SlidePanel() {
         minWidth: 220,
         maxWidth: 220,
         height: '100%',
-        background: '#111111',
-        borderRight: '1px solid #2a2a2a',
+        background: '#FFFFFF',
+        borderRight: '1px solid #E2E5EB',
         display: 'flex',
         flexDirection: 'column',
         userSelect: 'none',
@@ -342,12 +342,12 @@ export default function SlidePanel() {
       {/* Header */}
       <div style={{
         padding: '10px 12px 6px',
-        fontSize: 11,
+        fontSize: 12,
         fontWeight: 600,
-        color: '#888',
+        color: '#6B7280',
         textTransform: 'uppercase',
         letterSpacing: '0.05em',
-        borderBottom: '1px solid #222',
+        borderBottom: '1px solid #E2E5EB',
       }}>
         Slides ({deck.slides.length})
       </div>
@@ -365,7 +365,7 @@ export default function SlidePanel() {
             style={{
               opacity: dragIndex === index ? 0.4 : 1,
               borderTop: dropTarget === index && dragIndex !== null && dragIndex !== index
-                ? '2px solid #6366F1'
+                ? '2px solid #3B82F6'
                 : '2px solid transparent',
               transition: 'opacity 0.15s ease',
             }}
@@ -387,19 +387,19 @@ export default function SlidePanel() {
       {/* Add slide button */}
       <div style={{
         padding: '8px 12px',
-        borderTop: '1px solid #222',
+        borderTop: '1px solid #E2E5EB',
       }}>
         <button
           onClick={() => setShowTemplates(true)}
           style={{
             width: '100%',
-            height: 32,
-            background: '#6366F1',
+            height: 36,
+            background: '#3B82F6',
             color: '#fff',
             border: 'none',
             borderRadius: 4,
             cursor: 'pointer',
-            fontSize: 13,
+            fontSize: 14,
             fontWeight: 500,
             fontFamily: 'DM Sans, sans-serif',
             display: 'flex',
@@ -408,8 +408,8 @@ export default function SlidePanel() {
             gap: 6,
             transition: 'background 0.15s ease',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = '#5254cc'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = '#6366F1'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = '#2563EB'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = '#3B82F6'; }}
         >
           <span style={{ fontSize: 16, lineHeight: 1 }}>+</span>
           <span>Add Slide</span>
@@ -423,10 +423,10 @@ export default function SlidePanel() {
             position: 'fixed',
             left: contextMenu.x,
             top: contextMenu.y,
-            background: '#1e1e1e',
-            border: '1px solid #333',
+            background: '#FFFFFF',
+            border: '1px solid #E2E5EB',
             borderRadius: 6,
-            boxShadow: '0 4px 16px rgba(0,0,0,0.5)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
             zIndex: 10000,
             minWidth: 160,
             padding: '4px 0',
@@ -445,7 +445,7 @@ export default function SlidePanel() {
             onClick={() => handleContextAction('delete')}
             disabled={deck.slides.length <= 1}
           />
-          <div style={{ height: 1, background: '#333', margin: '4px 0' }} />
+          <div style={{ height: 1, background: '#E2E5EB', margin: '4px 0' }} />
           <ContextMenuItem
             label="Move Up"
             onClick={() => handleContextAction('moveUp')}
@@ -478,8 +478,8 @@ function ContextMenuItem({ label, shortcut, onClick, disabled }) {
         width: '100%',
         padding: '6px 12px',
         border: 'none',
-        background: hovered && !disabled ? '#333' : 'transparent',
-        color: disabled ? '#555' : '#ddd',
+        background: hovered && !disabled ? '#F0F2F5' : 'transparent',
+        color: disabled ? '#CBD0D8' : '#1A1D23',
         fontSize: 12,
         cursor: disabled ? 'default' : 'pointer',
         fontFamily: 'DM Sans, sans-serif',
@@ -488,7 +488,7 @@ function ContextMenuItem({ label, shortcut, onClick, disabled }) {
     >
       <span>{label}</span>
       {shortcut && (
-        <span style={{ fontSize: 10, color: '#666', marginLeft: 16 }}>{shortcut}</span>
+        <span style={{ fontSize: 10, color: '#9CA3AF', marginLeft: 16 }}>{shortcut}</span>
       )}
     </button>
   );

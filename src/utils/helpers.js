@@ -58,7 +58,7 @@ export const createDefaultElement = (type, theme) => {
         fontFamily: theme?.fontBody || 'DM Sans',
         fontWeight: '400',
         fontStyle: 'normal',
-        color: '#FFFFFF',
+        color: '#1A1D23',
         lineHeight: 1.4,
         letterSpacing: 0,
         textAlign: 'left',
@@ -72,7 +72,7 @@ export const createDefaultElement = (type, theme) => {
         ...base,
         shape: 'rectangle',
         width: 200, height: 150,
-        fill: { type: 'solid', color: theme?.accent1 || '#6366F1' },
+        fill: { type: 'solid', color: theme?.accent1 || '#3B82F6' },
         border: null,
         cornerRadius: 0,
       };
@@ -94,7 +94,7 @@ export const createDefaultElement = (type, theme) => {
         codeTheme: 'dark',
         fontSize: 14,
         fontFamily: theme?.fontMono || 'Space Mono',
-        color: '#E0E0E0',
+        color: '#374151',
         background: null,
         border: null,
       };
@@ -102,7 +102,7 @@ export const createDefaultElement = (type, theme) => {
       return {
         ...base,
         width: 400, height: 2,
-        color: '#FFFFFF',
+        color: '#1A1D23',
         thickness: 2,
         dash: 'solid',
       };

@@ -13,7 +13,7 @@ const HANDLE_SIZE = 8;
 // ============================================================
 
 const checkerboardBg = `
-  repeating-conic-gradient(#1a1a2e 0% 25%, #16162a 0% 50%) 0 0 / 24px 24px
+  repeating-conic-gradient(#F0F2F5 0% 25%, #E8EBF0 0% 50%) 0 0 / 24px 24px
 `;
 
 const canvasWrapStyle = {
@@ -122,7 +122,7 @@ function ResizeHandles({ el, onResizeStart, onRotateStart }) {
     width: hw,
     height: hh,
     background: '#FFFFFF',
-    border: '1.5px solid #6366F1',
+    border: '1.5px solid #3B82F6',
     borderRadius: 1,
     cursor: pos.cursor,
     zIndex: 9999,
@@ -135,7 +135,7 @@ function ResizeHandles({ el, onResizeStart, onRotateStart }) {
       <div style={{
         position: 'absolute',
         inset: -1,
-        border: '1.5px solid #6366F1',
+        border: '1.5px solid #3B82F6',
         pointerEvents: 'none',
         borderRadius: 1,
       }} />
@@ -159,7 +159,7 @@ function ResizeHandles({ el, onResizeStart, onRotateStart }) {
         top: -30,
         width: 1,
         height: 26,
-        background: '#6366F1',
+        background: '#3B82F6',
         transformOrigin: 'bottom center',
         pointerEvents: 'none',
       }} />
@@ -174,7 +174,7 @@ function ResizeHandles({ el, onResizeStart, onRotateStart }) {
           height: 12,
           borderRadius: '50%',
           background: '#FFFFFF',
-          border: '1.5px solid #6366F1',
+          border: '1.5px solid #3B82F6',
           cursor: 'grab',
           zIndex: 9999,
           boxSizing: 'border-box',
@@ -206,22 +206,22 @@ function ContextMenu({ x, y, onAction, onClose }) {
         position: 'fixed',
         left: x,
         top: y,
-        background: '#1e1e2e',
-        border: '1px solid #333',
+        background: '#FFFFFF',
+        border: '1px solid #E2E5EB',
         borderRadius: 8,
         padding: '4px 0',
         minWidth: 200,
-        boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
         zIndex: 10000,
         fontFamily: 'DM Sans, sans-serif',
         fontSize: 13,
-        color: '#e0e0e0',
+        color: '#1A1D23',
       }}
       onMouseDown={(e) => e.stopPropagation()}
     >
       {items.map((item, i) => {
         if (item.type === 'separator') {
-          return <div key={`sep-${i}`} style={{ height: 1, background: '#333', margin: '4px 8px' }} />;
+          return <div key={`sep-${i}`} style={{ height: 1, background: '#E2E5EB', margin: '4px 8px' }} />;
         }
         return (
           <div
@@ -233,7 +233,7 @@ function ContextMenu({ x, y, onAction, onClose }) {
               justifyContent: 'space-between',
               alignItems: 'center',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = '#2a2a3e'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = '#F0F2F5'; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
             onClick={() => {
               onAction(item.action);
@@ -241,7 +241,7 @@ function ContextMenu({ x, y, onAction, onClose }) {
             }}
           >
             <span>{item.label}</span>
-            <span style={{ color: '#666', fontSize: 11, marginLeft: 24 }}>{item.shortcut}</span>
+            <span style={{ color: '#9CA3AF', fontSize: 11, marginLeft: 24 }}>{item.shortcut}</span>
           </div>
         );
       })}
@@ -280,7 +280,7 @@ function renderElementContent(el) {
           fontSize: el.fontSize || 24,
           fontWeight: el.fontWeight || '400',
           fontStyle: el.fontStyle || 'normal',
-          color: el.color || '#FFFFFF',
+          color: el.color || '#1A1D23',
           lineHeight: el.lineHeight || 1.4,
           letterSpacing: el.letterSpacing != null ? `${el.letterSpacing}px` : undefined,
           textAlign: el.textAlign || 'left',
@@ -322,7 +322,7 @@ function renderElementContent(el) {
             <div style={{
               width: '100%',
               height: 2,
-              background: el.fill ? cssGradient(el.fill) : '#FFFFFF',
+              background: el.fill ? cssGradient(el.fill) : '#1A1D23',
               position: 'absolute',
               top: '50%',
               transform: 'translateY(-50%)',
@@ -334,7 +334,7 @@ function renderElementContent(el) {
               <div style={{
                 width: 'calc(100% - 8px)',
                 height: 2,
-                background: el.fill ? cssGradient(el.fill) : '#FFFFFF',
+                background: el.fill ? cssGradient(el.fill) : '#1A1D23',
                 position: 'absolute',
                 top: '50%',
                 left: 0,
@@ -349,7 +349,7 @@ function renderElementContent(el) {
                 height: 0,
                 borderTop: '6px solid transparent',
                 borderBottom: '6px solid transparent',
-                borderLeft: `10px solid ${el.fill ? (el.fill.color || '#FFFFFF') : '#FFFFFF'}`,
+                borderLeft: `10px solid ${el.fill ? (el.fill.color || '#1A1D23') : '#1A1D23'}`,
               }} />
             </div>
           );
@@ -382,9 +382,9 @@ function renderElementContent(el) {
           height: '100%',
           margin: 0,
           padding: 16,
-          background: el.background || '#1e1e2e',
+          background: el.background || '#F0F2F5',
           borderRadius: 8,
-          border: borderToCss(el.border) || '1px solid #333',
+          border: borderToCss(el.border) || '1px solid #E2E5EB',
           overflow: 'auto',
           boxSizing: 'border-box',
           fontSize: el.fontSize || 14,
@@ -406,7 +406,7 @@ function renderElementContent(el) {
           width: '100%',
           position: 'absolute',
           top: '50%',
-          borderTop: `${el.thickness || 2}px ${el.dash || 'solid'} ${el.color || '#FFFFFF'}`,
+          borderTop: `${el.thickness || 2}px ${el.dash || 'solid'} ${el.color || '#1A1D23'}`,
         }} />
       );
 
@@ -477,7 +477,7 @@ export default function SlideCanvas() {
     const handleKeyDown = (e) => {
       if (editingTextId) return; // Let text editing handle keys
 
-      if (e.code === 'Space' && !e.repeat) {
+      if (e.code === 'Space' && !e.repeat && !['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName) && !e.target.isContentEditable) {
         e.preventDefault();
         setSpaceHeld(true);
       }
@@ -920,7 +920,7 @@ export default function SlideCanvas() {
 
   if (!slide) {
     return (
-      <div style={{ ...canvasWrapStyle, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
+      <div style={{ ...canvasWrapStyle, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9CA3AF' }}>
         No slide selected
       </div>
     );
@@ -930,7 +930,7 @@ export default function SlideCanvas() {
     .filter(el => !el.hidden)
     .sort((a, b) => (a.zIndex || 0) - (b.zIndex || 0));
 
-  const slideBackground = slide.background ? cssBackground(slide.background) : '#0f0f23';
+  const slideBackground = slide.background ? cssBackground(slide.background) : '#FFFFFF';
 
   // Drag-select rect in slide coords
   let dragSelectRect = null;
@@ -971,7 +971,7 @@ export default function SlideCanvas() {
             height: CANVAS_H,
             position: 'relative',
             background: slideBackground,
-            boxShadow: '0 4px 40px rgba(0,0,0,0.4)',
+            boxShadow: '0 4px 40px rgba(0,0,0,0.12)',
             overflow: 'hidden',
           }}
         >
@@ -980,7 +980,7 @@ export default function SlideCanvas() {
             <div style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)`,
+              backgroundImage: `radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px)`,
               backgroundSize: `${GRID_SIZE}px ${GRID_SIZE}px`,
               pointerEvents: 'none',
               zIndex: 9000,
@@ -1027,7 +1027,7 @@ export default function SlideCanvas() {
                       fontSize: el.fontSize || 24,
                       fontWeight: el.fontWeight || '400',
                       fontStyle: el.fontStyle || 'normal',
-                      color: el.color || '#FFFFFF',
+                      color: el.color || '#1A1D23',
                       lineHeight: el.lineHeight || 1.4,
                       letterSpacing: el.letterSpacing != null ? `${el.letterSpacing}px` : undefined,
                       textAlign: el.textAlign || 'left',
@@ -1039,7 +1039,7 @@ export default function SlideCanvas() {
                       overflow: 'hidden',
                       boxSizing: 'border-box',
                       padding: el.background ? '8px' : undefined,
-                      outline: '2px solid #6366F1',
+                      outline: '2px solid #3B82F6',
                       cursor: 'text',
                     }}
                     onBlur={(e) => {
@@ -1127,8 +1127,8 @@ export default function SlideCanvas() {
               top: dragSelectRect.top,
               width: dragSelectRect.width,
               height: dragSelectRect.height,
-              background: 'rgba(99, 102, 241, 0.15)',
-              border: '1px solid rgba(99, 102, 241, 0.6)',
+              background: 'rgba(59, 130, 246, 0.12)',
+              border: '1px solid rgba(59, 130, 246, 0.5)',
               pointerEvents: 'none',
               zIndex: 9600,
             }} />
@@ -1142,13 +1142,13 @@ export default function SlideCanvas() {
           position: 'fixed',
           left: dragTooltip.x,
           top: dragTooltip.y,
-          background: '#1e1e2e',
-          color: '#e0e0e0',
+          background: '#FFFFFF',
+          color: '#1A1D23',
           fontSize: 11,
           fontFamily: 'Space Mono, monospace',
           padding: '3px 8px',
           borderRadius: 4,
-          border: '1px solid #333',
+          border: '1px solid #E2E5EB',
           pointerEvents: 'none',
           zIndex: 10001,
           whiteSpace: 'nowrap',

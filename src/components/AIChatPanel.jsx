@@ -99,9 +99,9 @@ function ChatMessage({ message }) {
         maxWidth: '85%',
         padding: '8px 12px',
         borderRadius: isUser ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
-        background: isError ? '#7f1d1d' : isUser ? '#6366F1' : '#2a2a2a',
-        color: isError ? '#fca5a5' : '#e0e0e0',
-        fontSize: 13,
+        background: isError ? '#FEE2E2' : isUser ? '#3B82F6' : '#F0F2F5',
+        color: isError ? '#991B1B' : isUser ? '#FFFFFF' : '#1A1D23',
+        fontSize: 14,
         lineHeight: 1.5,
         fontFamily: 'DM Sans, sans-serif',
         wordBreak: 'break-word',
@@ -132,8 +132,8 @@ function LoadingDots() {
       <div style={{
         padding: '8px 16px',
         borderRadius: '12px 12px 12px 2px',
-        background: '#2a2a2a',
-        color: '#888',
+        background: '#F0F2F5',
+        color: '#9CA3AF',
         fontSize: 18,
         fontFamily: 'monospace',
         minWidth: 40,
@@ -159,23 +159,23 @@ function ApplyButton({ jsonData, onApply }) {
           onClick={handleApply}
           style={{
             padding: '5px 14px',
-            background: '#6366F1',
+            background: '#3B82F6',
             color: '#fff',
             border: 'none',
             borderRadius: 6,
-            fontSize: 12,
+            fontSize: 13,
             fontWeight: 600,
             cursor: 'pointer',
             fontFamily: 'DM Sans, sans-serif',
             transition: 'background 0.15s ease',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = '#5254cc'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = '#6366F1'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = '#2563EB'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = '#3B82F6'; }}
         >
           Apply Changes
         </button>
       ) : (
-        <span style={{ fontSize: 12, color: '#4ade80', fontFamily: 'DM Sans, sans-serif' }}>
+        <span style={{ fontSize: 13, color: '#4ade80', fontFamily: 'DM Sans, sans-serif' }}>
           Changes applied
         </span>
       )}
@@ -193,14 +193,14 @@ function UndoAIButton({ onUndo }) {
         color: '#f87171',
         border: '1px solid #f87171',
         borderRadius: 4,
-        fontSize: 11,
+        fontSize: 12,
         cursor: 'pointer',
         fontFamily: 'DM Sans, sans-serif',
         marginTop: 2,
         marginBottom: 6,
         transition: 'background 0.15s ease',
       }}
-      onMouseEnter={(e) => { e.currentTarget.style.background = '#7f1d1d33'; }}
+      onMouseEnter={(e) => { e.currentTarget.style.background = '#FEE2E2'; }}
       onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
     >
       Undo AI Change
@@ -411,18 +411,18 @@ export default function AIChatPanel() {
         height: '100%',
         padding: 20,
         fontFamily: 'DM Sans, sans-serif',
-        color: '#888',
+        color: '#6B7280',
         textAlign: 'center',
         gap: 12,
       }}>
-        <svg width="32" height="32" viewBox="0 0 20 20" style={{ color: '#555' }}>
+        <svg width="32" height="32" viewBox="0 0 20 20" style={{ color: '#9CA3AF' }}>
           <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" fill="none"/>
           <path d="M10 6 L10 11 M10 13 L10 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
         </svg>
-        <div style={{ fontSize: 13 }}>
+        <div style={{ fontSize: 14 }}>
           No API key configured.
         </div>
-        <div style={{ fontSize: 12, color: '#666' }}>
+        <div style={{ fontSize: 13, color: '#9CA3AF' }}>
           Set your Anthropic API key in Settings to use AI features.
         </div>
         <button
@@ -430,11 +430,11 @@ export default function AIChatPanel() {
           style={{
             marginTop: 8,
             padding: '6px 16px',
-            background: '#6366F1',
+            background: '#3B82F6',
             color: '#fff',
             border: 'none',
             borderRadius: 6,
-            fontSize: 12,
+            fontSize: 13,
             fontWeight: 500,
             cursor: 'pointer',
             fontFamily: 'DM Sans, sans-serif',
@@ -468,17 +468,17 @@ export default function AIChatPanel() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#555',
-            fontSize: 12,
+            color: '#9CA3AF',
+            fontSize: 13,
             textAlign: 'center',
             gap: 8,
             padding: 20,
           }}>
-            <svg width="28" height="28" viewBox="0 0 20 20" style={{ color: '#444' }}>
+            <svg width="28" height="28" viewBox="0 0 20 20" style={{ color: '#CBD0D8' }}>
               <path d="M3 3 L17 3 L17 13 L10 13 L6 16 L6 13 L3 13 Z" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinejoin="round"/>
             </svg>
             <div>Ask DeckForge AI to create or modify your presentation.</div>
-            <div style={{ color: '#444', marginTop: 4 }}>
+            <div style={{ color: '#CBD0D8', marginTop: 4 }}>
               Try: "Create a 5-slide pitch deck about AI startups"
             </div>
           </div>
@@ -514,7 +514,7 @@ export default function AIChatPanel() {
 
       {/* Input area */}
       <div style={{
-        borderTop: '1px solid #2a2a2a',
+        borderTop: '1px solid #E2E5EB',
         padding: '8px 10px',
         display: 'flex',
         gap: 6,
@@ -530,19 +530,19 @@ export default function AIChatPanel() {
           style={{
             flex: 1,
             resize: 'none',
-            background: '#1e1e1e',
-            border: '1px solid #333',
+            background: '#FFFFFF',
+            border: '1px solid #E2E5EB',
             borderRadius: 8,
-            color: '#e0e0e0',
-            fontSize: 13,
+            color: '#1A1D23',
+            fontSize: 14,
             padding: '8px 10px',
             fontFamily: 'DM Sans, sans-serif',
             outline: 'none',
             lineHeight: 1.4,
             transition: 'border-color 0.15s ease',
           }}
-          onFocus={(e) => { e.target.style.borderColor = '#6366F1'; }}
-          onBlur={(e) => { e.target.style.borderColor = '#333'; }}
+          onFocus={(e) => { e.target.style.borderColor = '#3B82F6'; }}
+          onBlur={(e) => { e.target.style.borderColor = '#E2E5EB'; }}
         />
         <button
           onClick={sendMessage}
@@ -552,8 +552,8 @@ export default function AIChatPanel() {
             height: 36,
             borderRadius: 8,
             border: 'none',
-            background: chatLoading || !input.trim() ? '#333' : '#6366F1',
-            color: chatLoading || !input.trim() ? '#666' : '#fff',
+            background: chatLoading || !input.trim() ? '#F0F2F5' : '#3B82F6',
+            color: chatLoading || !input.trim() ? '#CBD0D8' : '#fff',
             cursor: chatLoading || !input.trim() ? 'default' : 'pointer',
             display: 'flex',
             alignItems: 'center',

@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Bricolage+Grotesque:wght@400;600;700&display=swap');
-@import "highlight.js/styles/github-dark.css";
+@import "highlight.js/styles/github.css";
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #111111;
-  --bg-panel: #1a1a1a;
-  --bg-surface: #222222;
-  --border-color: #2a2a2a;
-  --border-hover: #3a3a3a;
-  --accent: #6366F1;
-  --accent-hover: #818CF8;
-  --accent-muted: rgba(99, 102, 241, 0.15);
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-tertiary: rgba(255, 255, 255, 0.4);
+  --bg-primary: #F8F9FB;
+  --bg-panel: #FFFFFF;
+  --bg-surface: #F0F2F5;
+  --border-color: #E2E5EB;
+  --border-hover: #CBD0D8;
+  --accent: #3B82F6;
+  --accent-hover: #60A5FA;
+  --accent-muted: rgba(59, 130, 246, 0.1);
+  --text-primary: #1A1D23;
+  --text-secondary: rgba(26, 29, 35, 0.65);
+  --text-tertiary: rgba(26, 29, 35, 0.4);
   --danger: #EF4444;
   --success: #22C55E;
   --warning: #F59E0B;
@@ -32,7 +32,7 @@ html, body, #root {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 ::-webkit-scrollbar {
@@ -43,19 +43,19 @@ html, body, #root {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.12);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.2);
 }
 
 input[type="number"],
 input[type="text"],
 select,
 textarea {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
+  background: #FFFFFF;
+  border: 1px solid #E2E5EB;
   border-radius: 6px;
   color: var(--text-primary);
   padding: 4px 8px;
@@ -72,12 +72,12 @@ textarea:focus {
 
 input[type="color"] {
   -webkit-appearance: none;
-  border: 1px solid var(--border-color);
+  border: 1px solid #E2E5EB;
   border-radius: 4px;
   width: 28px;
   height: 28px;
   padding: 2px;
-  background: var(--bg-primary);
+  background: #FFFFFF;
   cursor: pointer;
 }
 input[type="color"]::-webkit-color-swatch-wrapper {
@@ -116,7 +116,7 @@ button {
   border-radius: 8px;
   padding: 4px;
   min-width: 180px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   z-index: 10000;
 }
 .context-menu-item {
@@ -146,7 +146,7 @@ button {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +162,7 @@ button {
   width: 90%;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
 }
 .modal h2 {
   margin: 0 0 16px;
