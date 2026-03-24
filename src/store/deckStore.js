@@ -31,12 +31,14 @@ const useDeckStore = create((set, get) => ({
   showFindReplace: false,
   saveStatus: 'saved', // saved | saving | unsaved
 
-  // Config
-  config: {
-    apiKey: '',
-    autoSave: true,
-    autoSaveInterval: 30000,
-  },
+  // Config — persisted to localStorage
+  config: (() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('deckforge-config'));
+      if (saved) return { apiKey: '', autoSave: true, autoSaveInterval: 30000, ...saved };
+    } catch {}
+    return { apiKey: '', autoSave: true, autoSaveInterval: 30000 };
+  })(),
 
   // AI chat
   chatMessages: [],
@@ -347,7 +349,11 @@ const useDeckStore = create((set, get) => ({
   // ========== CONFIG ==========
 
   setConfig: (updates) => {
-    set(s => ({ config: { ...s.config, ...updates } }));
+    set(s => {
+      const newConfig = { ...s.config, ...updates };
+      try { localStorage.setItem('deckforge-config', JSON.stringify(newConfig)); } catch {}
+      return { config: newConfig };
+    });
   },
 
   // ========== AI CHAT ==========
