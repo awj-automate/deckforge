@@ -15,7 +15,7 @@ const useDeckStore = create((set, get) => ({
   clipboard: [],
   tool: 'select', // select, text, rectangle, circle, triangle, line, arrow, image, code
   zoom: 0.85,
-  showGrid: true,
+  showGrid: false,
   isPanning: false,
   panOffset: { x: 0, y: 0 },
 

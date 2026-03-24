@@ -42,7 +42,7 @@ function App() {
       }}>
         {/* Left: Slide thumbnails */}
         <div style={{
-          width: 220,
+          width: 260,
           flexShrink: 0,
           background: 'var(--bg-panel)',
           borderRight: '1px solid var(--border-color)',
@@ -64,7 +64,7 @@ function App() {
 
         {/* Right: Properties / AI Chat */}
         <div style={{
-          width: 280,
+          width: 320,
           flexShrink: 0,
           background: 'var(--bg-panel)',
           borderLeft: '1px solid var(--border-color)',
@@ -119,7 +119,7 @@ function TabButton({ active, onClick, children }) {
         border: 'none',
         borderBottom: active ? '2px solid var(--accent)' : '2px solid transparent',
         color: active ? 'var(--text-primary)' : 'var(--text-tertiary)',
-        fontSize: 12,
+        fontSize: 13,
         fontWeight: active ? 600 : 400,
         cursor: 'pointer',
         transition: 'all 0.15s',

@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import useDeckStore from '../store/deckStore';
 import { cssBackground } from '../utils/helpers';
 
-const THUMB_WIDTH = 150;
+const THUMB_WIDTH = 190;
 const SLIDE_WIDTH = 960;
 const SLIDE_HEIGHT = 540;
 const SCALE = THUMB_WIDTH / SLIDE_WIDTH;
@@ -195,10 +195,11 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
     >
       {/* Slide number */}
       <div style={{
-        fontSize: 11,
+        fontSize: 13,
         color: isActive ? '#3B82F6' : '#6B7280',
-        marginBottom: 2,
+        marginBottom: 3,
         paddingLeft: 2,
+        fontWeight: 500,
         fontFamily: 'DM Sans, sans-serif',
       }}>
         {index + 1}
@@ -228,9 +229,9 @@ function SlideThumbnail({ slide, index, isActive, onSelect, onDragStart, onDragO
       {/* Notes preview */}
       {slide.notes && (
         <div style={{
-          fontSize: 9,
+          fontSize: 11,
           color: '#9CA3AF',
-          marginTop: 3,
+          marginTop: 4,
           paddingLeft: 2,
           paddingRight: 2,
           whiteSpace: 'nowrap',
@@ -327,9 +328,9 @@ export default function SlidePanel() {
     <div
       ref={panelRef}
       style={{
-        width: 220,
-        minWidth: 220,
-        maxWidth: 220,
+        width: 260,
+        minWidth: 260,
+        maxWidth: 260,
         height: '100%',
         background: '#FFFFFF',
         borderRight: '1px solid #E2E5EB',
@@ -341,8 +342,8 @@ export default function SlidePanel() {
     >
       {/* Header */}
       <div style={{
-        padding: '10px 12px 6px',
-        fontSize: 12,
+        padding: '12px 16px 8px',
+        fontSize: 13,
         fontWeight: 600,
         color: '#6B7280',
         textTransform: 'uppercase',
@@ -357,7 +358,7 @@ export default function SlidePanel() {
         flex: 1,
         overflowY: 'auto',
         overflowX: 'hidden',
-        padding: '8px 12px',
+        padding: '10px 16px',
       }}>
         {deck.slides.map((slide, index) => (
           <div
@@ -386,14 +387,14 @@ export default function SlidePanel() {
 
       {/* Add slide button */}
       <div style={{
-        padding: '8px 12px',
+        padding: '10px 16px',
         borderTop: '1px solid #E2E5EB',
       }}>
         <button
           onClick={() => setShowTemplates(true)}
           style={{
             width: '100%',
-            height: 36,
+            height: 40,
             background: '#3B82F6',
             color: '#fff',
             border: 'none',

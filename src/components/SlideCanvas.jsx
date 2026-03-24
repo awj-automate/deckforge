@@ -12,16 +12,12 @@ const HANDLE_SIZE = 8;
 // Checkerboard + chrome styles (inline, no CSS modules needed)
 // ============================================================
 
-const checkerboardBg = `
-  repeating-conic-gradient(#F0F2F5 0% 25%, #E8EBF0 0% 50%) 0 0 / 24px 24px
-`;
-
 const canvasWrapStyle = {
   width: '100%',
   height: '100%',
   position: 'relative',
   overflow: 'hidden',
-  background: checkerboardBg,
+  background: '#E5E7EB',
   cursor: 'default',
   userSelect: 'none',
   outline: 'none',
@@ -977,17 +973,7 @@ export default function SlideCanvas() {
             overflow: 'hidden',
           }}
         >
-          {/* Grid overlay */}
-          {showGrid && (
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px)`,
-              backgroundSize: `${GRID_SIZE}px ${GRID_SIZE}px`,
-              pointerEvents: 'none',
-              zIndex: 9000,
-            }} />
-          )}
+          {/* Grid overlay — only visible as snap behavior, no visual dots */}
 
           {/* Elements */}
           {sortedElements.map(el => {
