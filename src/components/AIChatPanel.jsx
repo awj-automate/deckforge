@@ -24,7 +24,7 @@ Deck JSON structure you output:
     "backgroundDefault": "#hex",
     "accent1": "#hex",
     "accent2": "#hex",
-    "fontHeading": "font name",
+    "fontDisplay": "font name",
     "fontBody": "font name",
     "fontMono": "font name"
   },
@@ -74,12 +74,15 @@ Available transitions: none, fade, slideLeft, slideRight, zoom, flip.
 Available shapes: rectangle, circle, triangle, line, arrow.
 
 IMPORTANT OUTPUT FORMAT:
-- When creating or modifying a deck, output ONLY the valid JSON object (the full deck or partial updates)
-- Wrap your JSON in a code block with \`\`\`json ... \`\`\` markers
-- If just answering a question or giving advice, respond in plain text
-- For partial updates, you can output just the slides array or a single slide object
+- When creating or modifying a deck, output ONLY the raw JSON object. No explanations before or after. No markdown. Just the JSON.
+- Do NOT wrap in code blocks. Do NOT add any text outside the JSON.
+- If just answering a question or giving advice (no deck changes needed), respond in plain text starting with "CHAT:"
+- For a full deck, output the complete object with meta, theme, and slides
+- For partial updates, output just { "slides": [...] } or a single slide object { "id": "...", "elements": [...] }
 - Always generate unique IDs for new elements (use random 8-char hex strings like "a1b2c3d4")
-- Use staggered animation delays (0, 200, 400, 600ms) for elements appearing sequentially`;
+- Use staggered animation delays (0, 200, 400, 600ms) for elements appearing sequentially
+- Use white (#FFFFFF) backgrounds for slides by default with dark text (#1A1D23)
+- The theme fields are: fontDisplay (for headings), fontBody (for body text), fontMono (for code)`;
 
 function generateId() {
   return Math.random().toString(16).slice(2, 10);
@@ -233,21 +236,62 @@ export default function AIChatPanel() {
   }, [chatMessages, chatLoading]);
 
   const extractJson = useCallback((text) => {
-    // Try to extract JSON from markdown code block
+    // 1. Try markdown code block
     const codeBlockMatch = text.match(/```(?:json)?\s*\n?([\s\S]*?)\n?```/);
     if (codeBlockMatch) {
       try {
         return JSON.parse(codeBlockMatch[1].trim());
-      } catch (e) {
-        // not valid JSON
+      } catch (e) { /* not valid */ }
+    }
+
+    // 2. Try the whole text as JSON
+    try {
+      return JSON.parse(text.trim());
+    } catch (e) { /* not valid */ }
+
+    // 3. Find the first { that starts a JSON object and try to parse from there
+    const firstBrace = text.indexOf('{');
+    if (firstBrace !== -1) {
+      // Find the matching closing brace by counting
+      let depth = 0;
+      let inString = false;
+      let escape = false;
+      for (let i = firstBrace; i < text.length; i++) {
+        const ch = text[i];
+        if (escape) { escape = false; continue; }
+        if (ch === '\\' && inString) { escape = true; continue; }
+        if (ch === '"') { inString = !inString; continue; }
+        if (inString) continue;
+        if (ch === '{') depth++;
+        if (ch === '}') { depth--; if (depth === 0) {
+          try {
+            const candidate = text.substring(firstBrace, i + 1);
+            return JSON.parse(candidate);
+          } catch (e) { break; }
+        }}
       }
     }
 
-    // Try parsing the whole text as JSON
-    try {
-      return JSON.parse(text.trim());
-    } catch (e) {
-      // not valid JSON
+    // 4. Try finding a JSON array
+    const firstBracket = text.indexOf('[');
+    if (firstBracket !== -1) {
+      let depth = 0;
+      let inString = false;
+      let escape = false;
+      for (let i = firstBracket; i < text.length; i++) {
+        const ch = text[i];
+        if (escape) { escape = false; continue; }
+        if (ch === '\\' && inString) { escape = true; continue; }
+        if (ch === '"') { inString = !inString; continue; }
+        if (inString) continue;
+        if (ch === '[') depth++;
+        if (ch === ']') { depth--; if (depth === 0) {
+          try {
+            const candidate = text.substring(firstBracket, i + 1);
+            return JSON.parse(candidate);
+          } catch (e) { break; }
+        }}
+      }
     }
 
     return null;
@@ -326,6 +370,13 @@ export default function AIChatPanel() {
 
       const data = await response.json();
       const assistantText = data.content?.[0]?.text || 'No response received.';
+
+      // If it's a plain chat response (prefixed with CHAT:), just show it
+      if (assistantText.trim().startsWith('CHAT:')) {
+        addChatMessage({ id: generateId(), role: 'assistant', content: assistantText.trim().slice(5).trim() });
+        setChatLoading(false);
+        return;
+      }
 
       // Check if response contains JSON — auto-apply it
       const jsonData = extractJson(assistantText);
