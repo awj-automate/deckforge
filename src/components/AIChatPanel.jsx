@@ -371,52 +371,61 @@ export default function AIChatPanel() {
       const data = await response.json();
       const assistantText = data.content?.[0]?.text || 'No response received.';
 
+      // Use getState() for fresh references inside async callback
+      const store = useDeckStore.getState();
+
       // If it's a plain chat response (prefixed with CHAT:), just show it
       if (assistantText.trim().startsWith('CHAT:')) {
-        addChatMessage({ id: generateId(), role: 'assistant', content: assistantText.trim().slice(5).trim() });
-        setChatLoading(false);
+        store.addChatMessage({ id: generateId(), role: 'assistant', content: assistantText.trim().slice(5).trim() });
+        store.setChatLoading(false);
         return;
       }
 
-      // Check if response contains JSON — auto-apply it
+      // Try to extract and auto-apply JSON
       const jsonData = extractJson(assistantText);
       if (jsonData) {
-        // Auto-apply the changes
         try {
+          const currentDeck = useDeckStore.getState().deck;
+          const slideIdx = useDeckStore.getState().currentSlideIndex;
+
           if (jsonData.slides && jsonData.meta) {
-            setDeck(jsonData);
-            addChatMessage({ id: generateId(), role: 'assistant', content: `Done! I've rebuilt the deck with ${jsonData.slides.length} slides. Take a look!` });
-          } else if (Array.isArray(jsonData.slides)) {
-            const newDeck = JSON.parse(JSON.stringify(deck));
+            // Full deck
+            store.setDeck(jsonData);
+            store.addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Rebuilt the deck with ${jsonData.slides.length} slides.` });
+          } else if (jsonData.slides && Array.isArray(jsonData.slides)) {
+            // Slides array with optional theme
+            const newDeck = JSON.parse(JSON.stringify(currentDeck));
             newDeck.slides = jsonData.slides;
             if (jsonData.theme) newDeck.theme = { ...newDeck.theme, ...jsonData.theme };
             newDeck.meta.modified = new Date().toISOString();
-            setDeck(newDeck);
-            addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Updated ${jsonData.slides.length} slides.` });
+            store.setDeck(newDeck);
+            store.addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Updated ${jsonData.slides.length} slides.` });
           } else if (Array.isArray(jsonData)) {
-            const newDeck = JSON.parse(JSON.stringify(deck));
+            // Raw array of slides
+            const newDeck = JSON.parse(JSON.stringify(currentDeck));
             newDeck.slides = jsonData;
             newDeck.meta.modified = new Date().toISOString();
-            setDeck(newDeck);
-            addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Replaced slides with ${jsonData.length} new slides.` });
-          } else if (jsonData.id && jsonData.elements) {
-            const newDeck = JSON.parse(JSON.stringify(deck));
-            newDeck.slides[currentSlideIndex] = jsonData;
+            store.setDeck(newDeck);
+            store.addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Replaced with ${jsonData.length} slides.` });
+          } else if (jsonData.elements) {
+            // Single slide
+            const newDeck = JSON.parse(JSON.stringify(currentDeck));
+            if (!jsonData.id) jsonData.id = generateId();
+            newDeck.slides[slideIdx] = jsonData;
             newDeck.meta.modified = new Date().toISOString();
-            setDeck(newDeck);
-            addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Updated slide ${currentSlideIndex + 1}.` });
+            store.setDeck(newDeck);
+            store.addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Updated slide ${slideIdx + 1}.` });
           } else {
-            // Can't determine format — show text with apply button as fallback
-            const msg = { id: generateId(), role: 'assistant', content: assistantText };
-            msg._jsonData = jsonData;
-            addChatMessage(msg);
+            // Couldn't figure out the shape — show as text
+            store.addChatMessage({ id: generateId(), role: 'assistant', content: assistantText });
           }
         } catch (applyErr) {
-          addChatMessage({ id: generateId(), role: 'error', content: `Failed to apply changes: ${applyErr.message}` });
+          console.error('Failed to apply AI changes:', applyErr);
+          store.addChatMessage({ id: generateId(), role: 'error', content: `Failed to apply: ${applyErr.message}` });
         }
       } else {
-        // Plain text response — show as-is
-        addChatMessage({ id: generateId(), role: 'assistant', content: assistantText });
+        // No JSON found — show as plain text
+        store.addChatMessage({ id: generateId(), role: 'assistant', content: assistantText });
       }
     } catch (err) {
       addChatMessage({
