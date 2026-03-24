@@ -42,7 +42,7 @@ function App() {
       }}>
         {/* Left: Slide thumbnails */}
         <div style={{
-          width: 260,
+          width: 300,
           flexShrink: 0,
           background: 'var(--bg-panel)',
           borderRight: '1px solid var(--border-color)',
@@ -64,7 +64,7 @@ function App() {
 
         {/* Right: Properties / AI Chat */}
         <div style={{
-          width: 320,
+          width: 360,
           flexShrink: 0,
           background: 'var(--bg-panel)',
           borderLeft: '1px solid var(--border-color)',

@@ -14,7 +14,7 @@ const useDeckStore = create((set, get) => ({
   editingTextId: null,
   clipboard: [],
   tool: 'select', // select, text, rectangle, circle, triangle, line, arrow, image, code
-  zoom: 0.85,
+  zoom: 1.05,
   showGrid: false,
   isPanning: false,
   panOffset: { x: 0, y: 0 },

@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import useDeckStore from '../store/deckStore';
 import { cssBackground } from '../utils/helpers';
 
-const THUMB_WIDTH = 190;
+const THUMB_WIDTH = 220;
 const SLIDE_WIDTH = 960;
 const SLIDE_HEIGHT = 540;
 const SCALE = THUMB_WIDTH / SLIDE_WIDTH;
@@ -328,9 +328,9 @@ export default function SlidePanel() {
     <div
       ref={panelRef}
       style={{
-        width: 260,
-        minWidth: 260,
-        maxWidth: 260,
+        width: 300,
+        minWidth: 300,
+        maxWidth: 300,
         height: '100%',
         background: '#FFFFFF',
         borderRight: '1px solid #E2E5EB',

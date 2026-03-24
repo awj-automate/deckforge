@@ -538,7 +538,7 @@ if(e.key==='ArrowLeft'){i=Math.max(i-1,0);render();}});</script></body></html>`;
   const handleZoomSelect = useCallback((preset) => {
     if (preset === 'fit') {
       // Approximate fit: assume a typical canvas area of ~700px wide
-      setZoom(0.85);
+      setZoom(1.05);
     } else {
       setZoom(preset);
     }

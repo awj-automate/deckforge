@@ -327,13 +327,45 @@ export default function AIChatPanel() {
       const data = await response.json();
       const assistantText = data.content?.[0]?.text || 'No response received.';
 
-      const assistantMessage = { id: generateId(), role: 'assistant', content: assistantText };
-      addChatMessage(assistantMessage);
-
-      // Check if response contains JSON
+      // Check if response contains JSON — auto-apply it
       const jsonData = extractJson(assistantText);
       if (jsonData) {
-        assistantMessage._jsonData = jsonData;
+        // Auto-apply the changes
+        try {
+          if (jsonData.slides && jsonData.meta) {
+            setDeck(jsonData);
+            addChatMessage({ id: generateId(), role: 'assistant', content: `Done! I've rebuilt the deck with ${jsonData.slides.length} slides. Take a look!` });
+          } else if (Array.isArray(jsonData.slides)) {
+            const newDeck = JSON.parse(JSON.stringify(deck));
+            newDeck.slides = jsonData.slides;
+            if (jsonData.theme) newDeck.theme = { ...newDeck.theme, ...jsonData.theme };
+            newDeck.meta.modified = new Date().toISOString();
+            setDeck(newDeck);
+            addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Updated ${jsonData.slides.length} slides.` });
+          } else if (Array.isArray(jsonData)) {
+            const newDeck = JSON.parse(JSON.stringify(deck));
+            newDeck.slides = jsonData;
+            newDeck.meta.modified = new Date().toISOString();
+            setDeck(newDeck);
+            addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Replaced slides with ${jsonData.length} new slides.` });
+          } else if (jsonData.id && jsonData.elements) {
+            const newDeck = JSON.parse(JSON.stringify(deck));
+            newDeck.slides[currentSlideIndex] = jsonData;
+            newDeck.meta.modified = new Date().toISOString();
+            setDeck(newDeck);
+            addChatMessage({ id: generateId(), role: 'assistant', content: `Done! Updated slide ${currentSlideIndex + 1}.` });
+          } else {
+            // Can't determine format — show text with apply button as fallback
+            const msg = { id: generateId(), role: 'assistant', content: assistantText };
+            msg._jsonData = jsonData;
+            addChatMessage(msg);
+          }
+        } catch (applyErr) {
+          addChatMessage({ id: generateId(), role: 'error', content: `Failed to apply changes: ${applyErr.message}` });
+        }
+      } else {
+        // Plain text response — show as-is
+        addChatMessage({ id: generateId(), role: 'assistant', content: assistantText });
       }
     } catch (err) {
       addChatMessage({
