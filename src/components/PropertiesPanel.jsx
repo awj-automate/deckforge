@@ -403,6 +403,15 @@ function ElementProperties() {
 
   const update = (updates) => updateElementWithUndo(el.id, updates);
 
+  // Update ALL selected elements at once
+  const updateAll = (updates) => {
+    elements.forEach((e) => updateElementWithUndo(e.id, updates));
+  };
+
+  // Check if multiple text elements are selected
+  const textElements = elements.filter((e) => e.type === 'text');
+  const hasMultiText = textElements.length > 1;
+
   const handleSizeChange = (dim, val) => {
     if (lockAspect && el.width && el.height) {
       const ratio = el.width / el.height;
@@ -521,8 +530,41 @@ function ElementProperties() {
 
       <div style={styles.divider} />
 
-      {/* ── Type-specific ── */}
-      {el.type === 'text' && <TextControls el={el} update={update} />}
+      {/* ── Multi-text shared controls ── */}
+      {hasMultiText && (
+        <Section title={`Text (${textElements.length} selected)`}>
+          <SelectField
+            label="Font"
+            value={textElements[0].fontFamily || 'DM Sans'}
+            options={FONTS}
+            onChange={(v) => updateAll({ fontFamily: v })}
+          />
+          <NumberField
+            label="Size"
+            value={textElements[0].fontSize ?? 24}
+            min={1}
+            max={400}
+            onChange={(v) => updateAll({ fontSize: v })}
+          />
+          <SelectField
+            label="Weight"
+            value={textElements[0].fontWeight || '400'}
+            options={['300', '400', '500', '600', '700']}
+            onChange={(v) => updateAll({ fontWeight: v })}
+          />
+          <div style={{ ...styles.row, gap: 4 }}>
+            <label style={styles.label}>Color</label>
+            <input
+              type="color"
+              value={textElements[0].color || '#1A1D23'}
+              onChange={(e) => updateAll({ color: e.target.value })}
+            />
+          </div>
+        </Section>
+      )}
+
+      {/* ── Type-specific (single element) ── */}
+      {!hasMultiText && el.type === 'text' && <TextControls el={el} update={update} />}
       {el.type === 'shape' && <ShapeControls el={el} update={update} />}
       {el.type === 'image' && <ImageControls el={el} update={update} />}
       {el.type === 'code' && <CodeControls el={el} update={update} />}

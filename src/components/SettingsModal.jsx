@@ -3,7 +3,7 @@ import useDeckStore from '../store/deckStore';
 import { FONTS, TRANSITIONS } from '../utils/helpers';
 
 export default function SettingsModal() {
-  const { deck, config, setConfig, updateTheme, updateMeta, setShowSettings } = useDeckStore();
+  const { deck, config, setConfig, updateTheme, updateMeta, setShowSettings, _pushUndo } = useDeckStore();
   const [apiKey, setApiKey] = useState(config.apiKey);
   const [title, setTitle] = useState(deck.meta.title);
 
@@ -91,6 +91,40 @@ export default function SettingsModal() {
               {FONTS.map(f => <option key={f} value={f}>{f}</option>)}
             </select>
           </Row>
+          <p style={{ color: 'var(--text-tertiary)', fontSize: 11, margin: '4px 0 0' }}>
+            These fonts are used for new elements. Use the button below to apply to all existing text.
+          </p>
+          <button
+            onClick={() => {
+              _pushUndo('Apply theme fonts');
+              const updatedDeck = JSON.parse(JSON.stringify(deck));
+              updatedDeck.slides.forEach(slide => {
+                slide.elements.forEach(el => {
+                  if (el.type === 'text') {
+                    // Large text (>=32px) gets display font, smaller gets body font
+                    el.fontFamily = (el.fontSize && el.fontSize >= 32) ? theme.fontDisplay : theme.fontBody;
+                  }
+                  if (el.type === 'code') {
+                    el.fontFamily = theme.fontMono;
+                  }
+                });
+              });
+              useDeckStore.getState().setDeck(updatedDeck);
+            }}
+            style={{
+              background: 'var(--accent)',
+              border: 'none',
+              borderRadius: 6,
+              color: '#fff',
+              padding: '8px 14px',
+              fontSize: 12,
+              fontWeight: 600,
+              cursor: 'pointer',
+              marginTop: 4,
+            }}
+          >
+            Apply fonts to all existing text
+          </button>
         </Section>
 
         {/* AI */}
